@@ -1,8 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0f172a">
 <title>Listado de tarjetas - La Reina</title>
 
 <style>
@@ -11,100 +13,83 @@
     --azul: #1d4ed8;
     --fondo: #f1f5f9;
     --borde: #e2e8f0;
+    --texto: #1e293b;
+    --gris: #64748b;
 }
 
 * {
     box-sizing: border-box;
 }
 
+html {
+    width: 100%;
+    overflow-x: hidden;
+    -webkit-text-size-adjust: 100%;
+}
+
 body {
     margin: 0;
-    padding: 24px;
-    font-family: Arial, sans-serif;
+    padding: 20px;
+    width: 100%;
+    font-family: Arial, Helvetica, sans-serif;
     background: var(--fondo);
-    color: #1e293b;
+    color: var(--texto);
 }
 
 .contenedor {
+    width: 100%;
     max-width: 1600px;
-    margin: auto;
-    background: white;
+    margin: 0 auto;
     padding: 24px;
-    border-radius: 12px;
+    background: white;
+    border-radius: 14px;
     box-shadow: 0 4px 15px #0000000d;
 }
 
 .encabezado {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 15px;
-    margin-bottom: 22px;
+    margin-bottom: 20px;
 }
 
 h1 {
     margin: 0;
     color: var(--azul-oscuro);
     font-size: 25px;
+    line-height: 1.35;
+    overflow-wrap: anywhere;
 }
 
 .subtitulo {
     margin-top: 7px;
-    color: #64748b;
-}
-
-.controles {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-    margin-bottom: 18px;
-}
-
-input, select, button {
-    padding: 11px 13px;
-    border: 1px solid var(--borde);
-    border-radius: 7px;
+    color: var(--gris);
     font-size: 14px;
-}
-
-#buscar {
-    flex: 1;
-    min-width: 240px;
-}
-
-button {
-    cursor: pointer;
-    background: var(--azul);
-    color: white;
-    border: none;
-    font-weight: bold;
-}
-
-button:hover {
-    opacity: .88;
-}
-
-.limpiar {
-    background: #64748b;
+    line-height: 1.5;
 }
 
 .resumen {
-    margin-bottom: 15px;
+    margin-bottom: 16px;
+    padding: 12px 14px;
+    background: #eff6ff;
+    color: #1e40af;
+    border: 1px solid #dbeafe;
+    border-radius: 8px;
     font-size: 14px;
-    color: #475569;
+    line-height: 1.5;
 }
 
+/* TABLA EN COMPUTADORA */
+
 .tabla-contenedor {
+    width: 100%;
     overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
     border: 1px solid var(--borde);
-    border-radius: 8px;
+    border-radius: 9px;
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
-    min-width: 950px;
+    min-width: 850px;
 }
 
 thead {
@@ -112,11 +97,14 @@ thead {
     color: white;
 }
 
-th, td {
+th,
+td {
     padding: 12px 10px;
     text-align: left;
     border-bottom: 1px solid var(--borde);
     font-size: 13px;
+    line-height: 1.5;
+    vertical-align: top;
 }
 
 th {
@@ -132,42 +120,168 @@ tbody tr:hover {
 }
 
 td:first-child {
-    font-weight: bold;
     color: var(--azul);
+    font-weight: bold;
+    white-space: nowrap;
 }
 
-@media print {
+/* TARJETAS PARA CELULAR */
+
+.tarjetas-movil {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.tarjeta-cliente {
+    width: 100%;
+    min-width: 0;
+    padding: 15px;
+    background: white;
+    border: 1px solid var(--borde);
+    border-radius: 12px;
+    box-shadow: 0 2px 7px #00000008;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+.tarjeta-cliente:nth-child(even) {
+    background: #f8fafc;
+}
+
+.tarjeta-superior {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 10px;
+    padding-bottom: 12px;
+    margin-bottom: 12px;
+    border-bottom: 1px solid var(--borde);
+}
+
+.tarjeta-numero {
+    display: inline-block;
+    max-width: 100%;
+    padding: 6px 9px;
+    background: #dbeafe;
+    color: #1d4ed8;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: bold;
+    overflow-wrap: anywhere;
+}
+
+.tarjeta-etiqueta {
+    display: block;
+    margin-bottom: 4px;
+    color: var(--gris);
+    font-size: 11px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: .4px;
+}
+
+.tarjeta-nombre {
+    margin: 0;
+    color: var(--azul-oscuro);
+    font-size: 16px;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+}
+
+.tarjeta-campo {
+    margin-top: 12px;
+    min-width: 0;
+    font-size: 14px;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+.tarjeta-valor {
+    color: var(--texto);
+}
+
+.tarjeta-vacia {
+    padding: 20px 14px;
+    color: var(--gris);
+    text-align: center;
+    background: white;
+    border: 1px solid var(--borde);
+    border-radius: 10px;
+}
+
+/* CELULARES Y TABLETAS */
+
+@media screen and (max-width: 700px) {
     body {
-        padding: 0;
-        background: white;
+        padding: 8px;
     }
 
     .contenedor {
-        padding: 0;
-        box-shadow: none;
+        padding: 12px;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px #0000000a;
     }
 
-    .controles, .no-imprimir {
-        display: none !important;
+    .encabezado {
+        margin-bottom: 14px;
+    }
+
+    h1 {
+        font-size: 21px;
+    }
+
+    .subtitulo {
+        font-size: 13px;
+    }
+
+    .resumen {
+        padding: 10px 12px;
+        font-size: 13px;
     }
 
     .tabla-contenedor {
-        overflow: visible;
-        border: none;
+        display: none !important;
     }
 
-    table {
-        min-width: 0;
+    .tarjetas-movil {
+        display: flex !important;
     }
 
-    th, td {
+    .tarjeta-cliente {
+        padding: 13px;
+    }
+
+    .tarjeta-nombre {
+        font-size: 15px;
+    }
+
+    .tarjeta-campo {
+        font-size: 13px;
+    }
+}
+
+@media screen and (max-width: 380px) {
+    body {
         padding: 5px;
-        font-size: 9px;
     }
 
-    thead {
-        print-color-adjust: exact;
-        -webkit-print-color-adjust: exact;
+    .contenedor {
+        padding: 9px;
+    }
+
+    h1 {
+        font-size: 19px;
+    }
+
+    .tarjeta-cliente {
+        padding: 11px;
+    }
+
+    .tarjeta-superior {
+        gap: 6px;
     }
 }
 </style>
@@ -176,38 +290,14 @@ td:first-child {
 <body>
 <div class="contenedor">
 
-    <div class="encabezado">
-        <div>
-            <h1>Listado de tarjetas</h1>
-            <div class="subtitulo">Zona: La Reina</div>
-        </div>
+    <header class="encabezado">
+        <h1>Listado de tarjetas</h1>
+        <div class="subtitulo">Zona: La Reina</div>
+    </header>
 
-        <button onclick="window.print()">Imprimir listado</button>
+    <div class="resumen" id="resumen">
+        Cargando listado...
     </div>
-
-    <div class="controles">
-        <input
-            type="search"
-            id="buscar"
-            placeholder="Buscar tarjeta, cliente, teléfono o dirección..."
-            oninput="filtrar()"
-        >
-
-        <select id="filtroAbono" onchange="filtrar()">
-            <option value="">Todos los últimos abonos</option>
-            <option value="2026">Abonos de 2026</option>
-            <option value="2025">Abonos de 2025</option>
-            <option value="2024">Abonos de 2024</option>
-            <option value="anteriores">Anteriores a 2024</option>
-            <option value="sin-fecha">Sin fecha</option>
-        </select>
-
-        <button class="limpiar" onclick="limpiarFiltros()">
-            Limpiar filtros
-        </button>
-    </div>
-
-    <div class="resumen" id="resumen"></div>
 
     <div class="tabla-contenedor">
         <table>
@@ -223,11 +313,11 @@ td:first-child {
             <tbody id="tablaClientes"></tbody>
         </table>
     </div>
+
+    <div class="tarjetas-movil" id="tarjetasMovil"></div>
 </div>
 
 <script>
-// Pega aquí los registros del listado original.
-// Formato: TARJETA|CLIENTE|TELEFONO|DIRECCION|ULT_ABONO
 const datos = `
 1206193|ABIGAIL PERAZA|6160-1419|COLONIA LA REINA CALLE AL BENEFICIO SECTOR LINEA|07/10/2026
 1176069|AIDA BINOOELA|7923-9218|COLONIA SAN JUAN 1 CASA 1 COLOR CELESTE COSTADO CANCHA|08/1/2025
@@ -379,14 +469,15 @@ const datos = `
 42500|ELIGIA SANCHEZ|7221-2081|COLONIA LA REINA CASA 15 POL.4 CALLE NICARAGUA|20/3/2024
 `;
 
-const clientes = datos.trim().split("\n").map(linea => {
-    const [tarjeta, cliente, telefono, direccion, abono] = linea.split("|");
+const clientes = datos.trim().split(/\r?\n/).filter(linea => linea.trim() !== "").map(linea => {
+    const partes = linea.split("|");
+
     return {
-        tarjeta: tarjeta || "",
-        cliente: cliente || "",
-        telefono: telefono || "",
-        direccion: direccion || "",
-        abono: abono || ""
+        tarjeta: partes[0] || "",
+        cliente: partes[1] || "",
+        telefono: partes[2] || "",
+        direccion: partes[3] || "",
+        abono: partes[4] || ""
     };
 });
 
@@ -400,53 +491,52 @@ function escapar(valor) {
     })[caracter]);
 }
 
-function filtrar() {
-    const busqueda = document.getElementById("buscar").value
-        .trim().toLocaleLowerCase("es");
-    const filtro = document.getElementById("filtroAbono").value;
+function mostrarClientes() {
+    const tabla = document.getElementById("tablaClientes");
+    const tarjetas = document.getElementById("tarjetasMovil");
 
-    const resultado = clientes.filter(c => {
-        const texto = [
-            c.tarjeta, c.cliente, c.telefono, c.direccion, c.abono
-        ].join(" ").toLocaleLowerCase("es");
+    tabla.innerHTML = clientes.map(c => `
+        <tr>
+            <td>${escapar(c.tarjeta)}</td>
+            <td>${escapar(c.cliente)}</td>
+            <td>${escapar(c.telefono || "No registrado")}</td>
+            <td>${escapar(c.direccion || "No registrada")}</td>
+            <td>${escapar(c.abono || "Sin fecha")}</td>
+        </tr>
+    `).join("");
 
-        let coincideTexto = texto.includes(busqueda);
-        let anio = c.abono.match(/(\d{4})$/);
-        let coincideAnio = true;
+    tarjetas.innerHTML = clientes.map(c => `
+        <article class="tarjeta-cliente">
+            <div class="tarjeta-superior">
+                <div>
+                    <span class="tarjeta-etiqueta">Cliente</span>
+                    <h2 class="tarjeta-nombre">${escapar(c.cliente || "Sin nombre")}</h2>
+                </div>
+                <span class="tarjeta-numero">${escapar(c.tarjeta)}</span>
+            </div>
 
-        if (filtro === "sin-fecha") {
-            coincideAnio = !c.abono;
-        } else if (filtro === "anteriores") {
-            coincideAnio = anio && Number(anio[1]) < 2024;
-        } else if (filtro) {
-            coincideAnio = anio && anio[1] === filtro;
-        }
+            <div class="tarjeta-campo">
+                <span class="tarjeta-etiqueta">Teléfono</span>
+                <div class="tarjeta-valor">${escapar(c.telefono || "No registrado")}</div>
+            </div>
 
-        return coincideTexto && coincideAnio;
-    });
+            <div class="tarjeta-campo">
+                <span class="tarjeta-etiqueta">Dirección</span>
+                <div class="tarjeta-valor">${escapar(c.direccion || "No registrada")}</div>
+            </div>
 
-    document.getElementById("tablaClientes").innerHTML =
-        resultado.map(c => `
-            <tr>
-                <td>${escapar(c.tarjeta)}</td>
-                <td>${escapar(c.cliente)}</td>
-                <td>${escapar(c.telefono)}</td>
-                <td>${escapar(c.direccion)}</td>
-                <td>${escapar(c.abono)}</td>
-            </tr>
-        `).join("");
+            <div class="tarjeta-campo">
+                <span class="tarjeta-etiqueta">Último abono</span>
+                <div class="tarjeta-valor">${escapar(c.abono || "Sin fecha")}</div>
+            </div>
+        </article>
+    `).join("");
 
     document.getElementById("resumen").textContent =
-        `Mostrando ${resultado.length} de ${clientes.length} tarjetas`;
+        `Total de tarjetas registradas: ${clientes.length}`;
 }
 
-function limpiarFiltros() {
-    document.getElementById("buscar").value = "";
-    document.getElementById("filtroAbono").value = "";
-    filtrar();
-}
-
-filtrar();
+mostrarClientes();
 </script>
 </body>
 </html>
