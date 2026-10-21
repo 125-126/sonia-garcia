@@ -1,10 +1,10 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#0f172a">
+
 <title>Listado de tarjetas - La Reina</title>
 
 <style>
@@ -23,13 +23,14 @@
 
 html {
     width: 100%;
+    min-height: 100%;
     overflow-x: hidden;
     -webkit-text-size-adjust: 100%;
 }
 
 body {
     margin: 0;
-    padding: 20px;
+    padding: 18px;
     width: 100%;
     font-family: Arial, Helvetica, sans-serif;
     background: var(--fondo);
@@ -40,14 +41,14 @@ body {
     width: 100%;
     max-width: 1600px;
     margin: 0 auto;
-    padding: 24px;
-    background: white;
-    border-radius: 14px;
+    padding: 22px;
+    background: #fff;
+    border-radius: 12px;
     box-shadow: 0 4px 15px #0000000d;
 }
 
 .encabezado {
-    margin-bottom: 20px;
+    margin-bottom: 16px;
 }
 
 h1 {
@@ -55,60 +56,72 @@ h1 {
     color: var(--azul-oscuro);
     font-size: 25px;
     line-height: 1.35;
-    overflow-wrap: anywhere;
 }
 
 .subtitulo {
-    margin-top: 7px;
+    margin-top: 6px;
     color: var(--gris);
     font-size: 14px;
-    line-height: 1.5;
 }
 
 .resumen {
-    margin-bottom: 16px;
-    padding: 12px 14px;
+    margin-bottom: 14px;
+    padding: 10px 13px;
     background: #eff6ff;
     color: #1e40af;
     border: 1px solid #dbeafe;
-    border-radius: 8px;
-    font-size: 14px;
-    line-height: 1.5;
+    border-radius: 7px;
+    font-size: 13px;
 }
 
-/* TABLA EN COMPUTADORA */
+/* TABLA: SIEMPRE EN FORMATO DE TABLA */
 
 .tabla-contenedor {
     width: 100%;
+    max-width: 100%;
     overflow-x: auto;
+    overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     border: 1px solid var(--borde);
-    border-radius: 9px;
+    border-radius: 8px;
+    background: #fff;
 }
 
 table {
     width: 100%;
-    border-collapse: collapse;
-    min-width: 850px;
+    min-width: 780px;
+    border-collapse: separate;
+    border-spacing: 0;
+    table-layout: auto;
 }
 
 thead {
     background: var(--azul-oscuro);
-    color: white;
-}
-
-th,
-td {
-    padding: 12px 10px;
-    text-align: left;
-    border-bottom: 1px solid var(--borde);
-    font-size: 13px;
-    line-height: 1.5;
-    vertical-align: top;
+    color: #fff;
 }
 
 th {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    padding: 12px 10px;
+    background: var(--azul-oscuro);
+    color: #fff;
+    text-align: left;
+    font-size: 12px;
+    font-weight: 700;
     white-space: nowrap;
+    border-bottom: 2px solid #334155;
+}
+
+td {
+    padding: 10px;
+    text-align: left;
+    vertical-align: top;
+    font-size: 12px;
+    line-height: 1.45;
+    border-bottom: 1px solid var(--borde);
+    overflow-wrap: anywhere;
 }
 
 tbody tr:nth-child(even) {
@@ -119,169 +132,130 @@ tbody tr:hover {
     background: #eff6ff;
 }
 
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* TARJETA: ENLACE AL REGISTRO ORIGINAL */
+
 td:first-child {
+    white-space: nowrap;
+    min-width: 100px;
+}
+
+.enlace-tarjeta {
     color: var(--azul);
-    font-weight: bold;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.enlace-tarjeta:hover {
+    text-decoration: underline;
+}
+
+.col-cliente {
+    min-width: 175px;
+}
+
+.col-telefono {
+    min-width: 115px;
     white-space: nowrap;
 }
 
-/* TARJETAS PARA CELULAR */
-
-.tarjetas-movil {
-    display: none;
-    width: 100%;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.tarjeta-cliente {
-    width: 100%;
-    min-width: 0;
-    padding: 15px;
-    background: white;
-    border: 1px solid var(--borde);
-    border-radius: 12px;
-    box-shadow: 0 2px 7px #00000008;
-    overflow-wrap: anywhere;
-    word-break: break-word;
-}
-
-.tarjeta-cliente:nth-child(even) {
-    background: #f8fafc;
-}
-
-.tarjeta-superior {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 10px;
-    padding-bottom: 12px;
-    margin-bottom: 12px;
-    border-bottom: 1px solid var(--borde);
-}
-
-.tarjeta-numero {
-    display: inline-block;
-    max-width: 100%;
-    padding: 6px 9px;
-    background: #dbeafe;
-    color: #1d4ed8;
-    border-radius: 6px;
-    font-size: 13px;
-    font-weight: bold;
+.col-direccion {
+    min-width: 240px;
+    white-space: normal;
     overflow-wrap: anywhere;
 }
 
-.tarjeta-etiqueta {
-    display: block;
-    margin-bottom: 4px;
-    color: var(--gris);
-    font-size: 11px;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: .4px;
+.col-abono {
+    min-width: 105px;
+    white-space: nowrap;
 }
-
-.tarjeta-nombre {
-    margin: 0;
-    color: var(--azul-oscuro);
-    font-size: 16px;
-    line-height: 1.4;
-    overflow-wrap: anywhere;
-}
-
-.tarjeta-campo {
-    margin-top: 12px;
-    min-width: 0;
-    font-size: 14px;
-    line-height: 1.5;
-    overflow-wrap: anywhere;
-    word-break: break-word;
-}
-
-.tarjeta-valor {
-    color: var(--texto);
-}
-
-.tarjeta-vacia {
-    padding: 20px 14px;
-    color: var(--gris);
-    text-align: center;
-    background: white;
-    border: 1px solid var(--borde);
-    border-radius: 10px;
-}
-
-/* CELULARES Y TABLETAS */
 
 @media screen and (max-width: 700px) {
-    body {
-        padding: 8px;
-    }
-
-    .contenedor {
-        padding: 12px;
-        border-radius: 10px;
-        box-shadow: 0 2px 10px #0000000a;
-    }
-
-    .encabezado {
-        margin-bottom: 14px;
-    }
-
-    h1 {
-        font-size: 21px;
-    }
-
-    .subtitulo {
-        font-size: 13px;
-    }
-
-    .resumen {
-        padding: 10px 12px;
-        font-size: 13px;
-    }
-
-    .tabla-contenedor {
-        display: none !important;
-    }
-
-    .tarjetas-movil {
-        display: flex !important;
-    }
-
-    .tarjeta-cliente {
-        padding: 13px;
-    }
-
-    .tarjeta-nombre {
-        font-size: 15px;
-    }
-
-    .tarjeta-campo {
-        font-size: 13px;
-    }
-}
-
-@media screen and (max-width: 380px) {
     body {
         padding: 5px;
     }
 
     .contenedor {
         padding: 9px;
+        border-radius: 7px;
+    }
+
+    .encabezado {
+        margin-bottom: 12px;
     }
 
     h1 {
-        font-size: 19px;
+        font-size: 20px;
     }
 
-    .tarjeta-cliente {
-        padding: 11px;
+    .subtitulo {
+        font-size: 12px;
     }
 
-    .tarjeta-superior {
-        gap: 6px;
+    .resumen {
+        padding: 9px;
+        margin-bottom: 10px;
+        font-size: 12px;
+    }
+
+    .tabla-contenedor {
+        display: block;
+        width: 100%;
+        max-width: 100%;
+        overflow-x: auto;
+        overflow-y: auto;
+        border-radius: 6px;
+        touch-action: pan-x pan-y;
+    }
+
+    table {
+        width: 900px;
+        min-width: 900px;
+        table-layout: fixed;
+    }
+
+    th {
+        padding: 10px 8px;
+        font-size: 11px;
+    }
+
+    td {
+        padding: 9px 8px;
+        font-size: 12px;
+        line-height: 1.45;
+    }
+
+    .col-cliente {
+        width: 190px;
+    }
+
+    .col-telefono {
+        width: 125px;
+    }
+
+    .col-direccion {
+        width: 290px;
+    }
+
+    .col-abono {
+        width: 115px;
+    }
+}
+
+@media screen and (max-width: 380px) {
+    body {
+        padding: 3px;
+    }
+
+    .contenedor {
+        padding: 6px;
+    }
+
+    h1 {
+        font-size: 18px;
     }
 }
 </style>
@@ -304,17 +278,16 @@ td:first-child {
             <thead>
                 <tr>
                     <th>TARJETA</th>
-                    <th>CLIENTE</th>
-                    <th>TELÉFONO</th>
-                    <th>DIRECCIÓN</th>
-                    <th>ÚLTIMO ABONO</th>
+                    <th class="col-cliente">CLIENTE</th>
+                    <th class="col-telefono">TELEFONO</th>
+                    <th class="col-direccion">DIRECCION</th>
+                    <th class="col-abono">ULT_ABONO</th>
                 </tr>
             </thead>
             <tbody id="tablaClientes"></tbody>
         </table>
     </div>
 
-    <div class="tarjetas-movil" id="tarjetasMovil"></div>
 </div>
 
 <script>
@@ -469,17 +442,20 @@ const datos = `
 42500|ELIGIA SANCHEZ|7221-2081|COLONIA LA REINA CASA 15 POL.4 CALLE NICARAGUA|20/3/2024
 `;
 
-const clientes = datos.trim().split(/\r?\n/).filter(linea => linea.trim() !== "").map(linea => {
-    const partes = linea.split("|");
+const clientes = datos.trim()
+    .split(/\r?\n/)
+    .filter(linea => linea.trim() !== "")
+    .map(linea => {
+        const partes = linea.split("|");
 
-    return {
-        tarjeta: partes[0] || "",
-        cliente: partes[1] || "",
-        telefono: partes[2] || "",
-        direccion: partes[3] || "",
-        abono: partes[4] || ""
-    };
-});
+        return {
+            tarjeta: partes[0] || "",
+            cliente: partes[1] || "",
+            telefono: partes[2] || "",
+            direccion: partes[3] || "",
+            abono: partes[4] || ""
+        };
+    });
 
 function escapar(valor) {
     return String(valor).replace(/[&<>"']/g, caracter => ({
@@ -493,43 +469,22 @@ function escapar(valor) {
 
 function mostrarClientes() {
     const tabla = document.getElementById("tablaClientes");
-    const tarjetas = document.getElementById("tarjetasMovil");
 
     tabla.innerHTML = clientes.map(c => `
         <tr>
-            <td>${escapar(c.tarjeta)}</td>
-            <td>${escapar(c.cliente)}</td>
-            <td>${escapar(c.telefono || "No registrado")}</td>
-            <td>${escapar(c.direccion || "No registrada")}</td>
-            <td>${escapar(c.abono || "Sin fecha")}</td>
+            <td>
+                <a
+                    class="enlace-tarjeta"
+                    href="https://amayafuturo.com:4433/CONSULTARTARJETA.ASP?TARJETA=${encodeURIComponent(c.tarjeta)}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >${escapar(c.tarjeta)}</a>
+            </td>
+            <td class="col-cliente">${escapar(c.cliente)}</td>
+            <td class="col-telefono">${escapar(c.telefono)}</td>
+            <td class="col-direccion">${escapar(c.direccion)}</td>
+            <td class="col-abono">${escapar(c.abono)}</td>
         </tr>
-    `).join("");
-
-    tarjetas.innerHTML = clientes.map(c => `
-        <article class="tarjeta-cliente">
-            <div class="tarjeta-superior">
-                <div>
-                    <span class="tarjeta-etiqueta">Cliente</span>
-                    <h2 class="tarjeta-nombre">${escapar(c.cliente || "Sin nombre")}</h2>
-                </div>
-                <span class="tarjeta-numero">${escapar(c.tarjeta)}</span>
-            </div>
-
-            <div class="tarjeta-campo">
-                <span class="tarjeta-etiqueta">Teléfono</span>
-                <div class="tarjeta-valor">${escapar(c.telefono || "No registrado")}</div>
-            </div>
-
-            <div class="tarjeta-campo">
-                <span class="tarjeta-etiqueta">Dirección</span>
-                <div class="tarjeta-valor">${escapar(c.direccion || "No registrada")}</div>
-            </div>
-
-            <div class="tarjeta-campo">
-                <span class="tarjeta-etiqueta">Último abono</span>
-                <div class="tarjeta-valor">${escapar(c.abono || "Sin fecha")}</div>
-            </div>
-        </article>
     `).join("");
 
     document.getElementById("resumen").textContent =
@@ -538,5 +493,6 @@ function mostrarClientes() {
 
 mostrarClientes();
 </script>
+
 </body>
 </html>
